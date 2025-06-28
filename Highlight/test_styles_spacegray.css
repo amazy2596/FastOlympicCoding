@@ -28,6 +28,14 @@ a {
 	background-color: color(var(--redish) alpha(0.3));
 }
 
+.test-Passed {
+	background-color: color(var(--greenish) alpha(0.2));
+}
+
+.test-Failed {
+	background-color: color(var(--redish) alpha(0.3));
+}
+
 .sep {
 	text-decoration: none;
 }
