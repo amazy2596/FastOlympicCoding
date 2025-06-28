@@ -130,11 +130,10 @@ class TestManagerCommand(sublime_plugin.TextCommand):
 				styles = get_test_styles(view)
 				content = open(root_dir + '/Highlight/test_config.html').read()
 				test_type = ''
-				if self.is_correct_answer(_out):
-					test_type = 'test-accept'
-
-				if str(self.rtcode) != '0':
+				if str(self.rtcode) != '0' or not self.is_correct_answer(_out):
 					test_type = 'test-decline'
+				elif self.is_correct_answer(_out):
+					test_type = 'test-accept'
 
 				content = content.format(
 					test_id=i,
@@ -591,9 +590,9 @@ class TestManagerCommand(sublime_plugin.TextCommand):
 
 			if not running and not tester.tests[i].fold and str(tester.tests[i].rtcode) == '0' and tester.prog_out[i]:
 				if tester.tests[i].is_correct_answer(tester.prog_out[i]):
-					type = 'decline'
+					type = 'Passed'
 				else:
-					type = 'accept'
+					type = 'Failed'
 				accdec = tester.tests[i].get_accdec(
 					i,
 					pt,
